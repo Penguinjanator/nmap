@@ -55,8 +55,8 @@ local stdnse = require "stdnse"
 local string = require "string"
 local table  = require "table"
 local math   = require "math"
-local io     = io
-local os     = os
+local io     = require "io"
+local os     = require "os"
 
 _ENV = stdnse.module("dicom", stdnse.seeall)
 

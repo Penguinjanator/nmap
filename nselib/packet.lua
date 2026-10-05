@@ -8,6 +8,7 @@ local ipOps = require "ipOps"
 local stdnse = require "stdnse"
 local string = require "string"
 local tableaux = require "tableaux"
+local table = require "table"
 local unittest = require "unittest"
 _ENV = stdnse.module("packet", stdnse.seeall)
 

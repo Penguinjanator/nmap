@@ -97,6 +97,7 @@ local nmap      = require "nmap"
 local string    = require "string"
 local math      = require "math"
 local dicom     = require "dicom"
+local os = require "os"
 
 portrule = shortport.port_or_service({104, 2762, 11112, 4242}, "dicom", "tcp",
     "open")

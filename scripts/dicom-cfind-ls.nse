@@ -98,6 +98,7 @@ local string    = require "string"
 local table     = require "table"
 local math      = require "math"
 local dicom     = require "dicom"
+local os = require "os"
 
 -- Verify we have the enhanced library (not Nmap's built-in minimal version)
 assert(dicom.explicit_elem,
