@@ -659,10 +659,12 @@ static void set_nmap_libraries (lua_State *L)
     {NULL, NULL}
   };
 
+  luaL_getsubtable(L, LUA_REGISTRYINDEX, LUA_PRELOAD_TABLE);
   for (int i = 0; libs[i].name; i++) {
-    luaL_requiref(L, libs[i].name, libs[i].func, 1);
-    lua_pop(L, 1);
+    lua_pushcfunction(L, libs[i].func);
+    lua_setfield(L, -2, libs[i].name);
   }
+  lua_pop(L, 1);  // remove PRELOAD table
 }
 
 static int init_main (lua_State *L)
