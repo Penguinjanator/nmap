@@ -640,6 +640,11 @@ static int panic (lua_State *L)
   return 0;
 }
 
+static int nse_lib_unavailable (lua_State *L) {
+  const char *modname = luaL_optstring(L, 1, "module");
+  return luaL_error(L, "module '%s' unavailable in this configuration", modname);
+}
+
 static void set_nmap_libraries (lua_State *L)
 {
   static const luaL_Reg libs[] = {
@@ -649,13 +654,22 @@ static void set_nmap_libraries (lua_State *L)
     {LPEGLIBNAME, luaopen_lpeg},
 #ifdef HAVE_LIBSSH2
     {LIBSSH2LIBNAME, luaopen_libssh2},
+#else
+    {LIBSSH2LIBNAME, nse_lib_unavailable},
 #endif
 #ifdef HAVE_OPENSSL
     {OPENSSLLIBNAME, luaopen_openssl},
+#else
+    {OPENSSLLIBNAME, nse_lib_unavailable},
 #endif
 #ifdef HAVE_LIBZ
     {NSE_ZLIBNAME, luaopen_zlib},
+#else
+    {NSE_ZLIBNAME, nse_lib_unavailable},
 #endif
+    /* Libraries removed from nselib in earlier releases */
+    {"bit", nse_lib_unavailable},
+    {"pcre", nse_lib_unavailable},
     {NULL, NULL}
   };
 
