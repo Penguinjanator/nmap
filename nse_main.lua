@@ -293,6 +293,11 @@ local function K (a)
 end
 
 local REQUIRE_ERROR = {};
+setmetatable(REQUIRE_ERROR, {
+    __tostring = function()
+      return "required module unavailable in this configuration"
+    end
+  })
 rawset(stdnse, "silent_require", function (...)
   local status, mod = pcall(require, ...);
   if not status then
@@ -637,7 +642,7 @@ do
     local status, e = resume(co); -- Get the globals it loads in env
     if not status then
       if quiet_errors[e] then
-        print_verbose(1, "Failed to load '%s'.", filename);
+        print_verbose(1, "Failed to load '%s': %s", filename, e);
         return nil;
       else
         log_error("Failed to load %s:\n%s", filename, traceback(co, e));
