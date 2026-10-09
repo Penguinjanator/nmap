@@ -957,6 +957,13 @@ void open_nse (void)
     lua_atpanic(L_NSE, panic);
     lua_settop(L_NSE, 0);
 
+    /* Do not allow environment variables to override the module search path.
+     * We do this here instead of in init_main to ensure we control all
+     * standard library loads as well.
+     */
+    lua_pushboolean(L_NSE, 1);
+    lua_setfield(L_NSE, LUA_REGISTRYINDEX, "LUA_NOENV");
+
     lua_pushcfunction(L_NSE, nseU_traceback);
     lua_pushcfunction(L_NSE, init_main);
     lua_pushlightuserdata(L_NSE, &o.chosenScripts);

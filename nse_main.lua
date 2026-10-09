@@ -144,7 +144,11 @@ do -- Add loader to look in nselib/?.lua (nselib/ can be in multiple places)
       return "\n\tNSE failed to find "..name.." in search paths.";
     end
   end
-  insert(package.searchers, 1, loader);
+  -- Replace all file-path searchers with our fetchfile searcher
+  package.searchers = {
+    package.searchers[1], -- Original preload searcher
+    loader, -- Our fetchfile searcher
+  }
 end
 
 local lpeg = require "lpeg";
