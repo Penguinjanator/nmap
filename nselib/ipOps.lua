@@ -91,7 +91,7 @@ isPrivate = function( ip )
       return true, '192.168/16'
     elseif ip:match('^192%.[0][0]?[0]?%.[0][0]?[0]?%.') then
       return true, '192.0.0/24'
-    elseif ip:match('^192%.[0][0]?[0]?%.[0]?[0]?2') then
+    elseif ip:match('^192%.[0][0]?[0]?%.[0]?[0]?2%.') then
       return true, '192.0.2/24'
     end
 

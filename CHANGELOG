@@ -89,6 +89,9 @@ o [Zenmap][GH#3431] Fix "KeyError: 'vl_6_logo'" crash in Zenmap 7.991.
 
 o [NSE] Added DHX2 authentication method to afp.lua [Daniel Miller]
 
+o [NSE][GH#3536] Function ipOps.isPrivate() was incorrectly treating all IPv4
+  addresses starting with 192.0.2x or 192.0.2xx as private. [Pasi Abe]
+
 o [NSE][GH#3494] Malformed TPKT header could have caused parser infinite loop
   in library iec61850mms. Truncated data were silently ignored.
   [Zasnit1, nnposter]
